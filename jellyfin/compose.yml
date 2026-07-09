@@ -1,0 +1,19 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri          # Quick Sync — your freshly dusted iGPU at work
+    volumes:
+      - jellyfin-config:/config
+      - /srv/media:/media
+    ports:
+      - 8096:8096
+    networks: [homelab]
+
+volumes:
+  jellyfin-config:
+
+networks:
+  homelab:
+    external: true
