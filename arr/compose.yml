@@ -1,0 +1,60 @@
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    volumes:
+      - sonarr-config:/config
+      - /srv:/data
+    ports:
+      - 8989:8989
+    networks: [homelab]
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    volumes:
+      - radarr-config:/config
+      - /srv:/data
+    ports:
+      - 7878:7878
+    networks: [homelab]
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    volumes:
+      - prowlarr-config:/config
+    ports:
+      - 9696:9696
+    networks: [homelab]
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Europe/Zurich
+    ports:
+      - 8191:8191
+    networks: [homelab]
+
+volumes:
+  sonarr-config:
+  radarr-config:
+  prowlarr-config:
+
+networks:
+  homelab:
+    external: true

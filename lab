@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# CHANGE: helper to manage all compose stacks under ~/stacks
+set -e
+cd "$(dirname "$0")"
+cmd="${1:-up}"
+
+for dir in */; do
+  [ -f "$dir/compose.yml" ] || continue
+  echo "==> $dir"
+  case "$cmd" in
+    up)      docker compose -f "$dir/compose.yml" up -d ;;
+    down)    docker compose -f "$dir/compose.yml" down ;;
+    pull)    docker compose -f "$dir/compose.yml" pull ;;
+    restart) docker compose -f "$dir/compose.yml" restart ;;
+    ps)      docker compose -f "$dir/compose.yml" ps ;;
+    *) echo "usage: lab [up|down|pull|restart|ps]"; exit 1 ;;
+  esac
+done

@@ -3,7 +3,9 @@ services:
     image: jellyfin/jellyfin
     restart: unless-stopped
     devices:
-      - /dev/dri:/dev/dri          # Quick Sync — your freshly dusted iGPU at work
+      - /dev/dri:/dev/dri          # Quick Sync — your freshly dusted iGPU at worki
+    group_add:
+      - "992"
     volumes:
       - jellyfin-config:/config
       - /srv/media:/media
