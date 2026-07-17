@@ -9,7 +9,7 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=wireguard
-      - WIREGUARD_PRIVATE_KEY=sAcr/5AF3Kv4hZKQZhp06HY+kdOnhnPkfw/+tOPqQH0=
+      - WIREGUARD_PRIVATE_KEY= # Add key here
       - SERVER_COUNTRIES=Switzerland
       - VPN_PORT_FORWARDING=on
     ports:
@@ -28,8 +28,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Zurich
-      - USER=soba
-      - PASS=kiki
+      - USER= # user name 
+      - PASS= # set password
     volumes:
       - transmission-config:/config
       - /srv:/data
